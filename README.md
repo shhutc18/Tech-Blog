@@ -26,7 +26,7 @@ This application is a technology blog. Upon signing in, you will be able to post
 
 ## Installation
 
-1. Clone this repository: https://github.com/shhutc18/E-Commerce-Back-End
+1. Clone this repository: https://github.com/shhutc18/Tech-Blog
 2. Open the cloned repository in any source code editor.
 
 ## Usage
