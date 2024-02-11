@@ -5,7 +5,7 @@
     <img src="https://img.shields.io/badge/-Express.js-green" />
     <img src="https://img.shields.io/badge/-Sequelize-red" >
     <img src="https://img.shields.io/badge/-mySQL-blue" >
-    <img src="https://img.shields.io/badge/-Model-View-Controller-orange" >
+    <img src="https://img.shields.io/badge/-MVC-yellow" >
     <img src="https://img.shields.io/badge/-Handlebars-pink" >
     <img src="https://img.shields.io/badge/-bcrypt-lightgrey" />
 </p>
