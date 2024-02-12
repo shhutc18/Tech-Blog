@@ -6,6 +6,8 @@ const { Store } = require('connect-session-sequelize')(require('express-session'
 const sequelize = require('./config/connection');
 const routes = require('./controllers');
 const helpers = require('./utils/helpers');
+const session = require('express-session');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 // Initialize an instance of express
 const app = express();
@@ -14,12 +16,18 @@ const PORT = process.env.PORT || 3001;
 
 // Configure the session object
 const sess = {
-  secret: 'super big secret', // Secret key for session
-  cookie: { expires: 10 * 60 * 1000 }, // Set the session expiry
-  resave: true, // Forces the session to be saved back to the session store
-  rolling: true, // Force a session identifier cookie to be set on every response
-  saveUninitialized: true, // Forces a session that is "uninitialized" to be saved to the store
-  store: new Store({ db: sequelize }), // Use sequelize as session store
+  secret: 'Super secret secret',
+  cookie: {
+    maxAge: 300000,
+    httpOnly: true,
+    secure: false,
+    sameSite: 'strict',
+  },
+  resave: false,
+  saveUninitialized: true,
+  store: new SequelizeStore({
+    db: sequelize,
+  }),
 };
 
 // Use the session middleware
