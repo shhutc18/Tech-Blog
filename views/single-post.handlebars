@@ -1,0 +1,20 @@
+<!-- Include the post-info partial with the current post data -->
+{{> post-info post}}
+
+<!-- If the user is logged in, display the comment form -->
+{{#if loggedIn}}
+<form class="comment-form">
+  <!-- Textarea for the comment body -->
+  <textarea class="ml-5" name="comment-body"></textarea>
+  <!-- Submit button for the comment form -->
+  <button class="button is-warning ml-5 mb-5" type="submit">Add comment</button>
+</form>
+{{/if}}
+
+<!-- Include the comments partial with the current post's comments -->
+{{> comments post.comments}}
+
+<!-- If the user is logged in, include the comment.js script -->
+{{#if loggedIn}}
+<script src="/javascript/comment.js"></script>
+{{/if}}
