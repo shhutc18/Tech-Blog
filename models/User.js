@@ -1,65 +1,81 @@
-// Import the necessary modules from 'sequelize' and 'bcrypt'
+// Import the necessary modules from sequelize
 const { Model, DataTypes } = require('sequelize');
+// Import the configured sequelize instance
+const sequelize = require('../config/connection');
+// Import the bcrypt module for password hashing
 const bcrypt = require('bcrypt');
 
-// Import the configured sequelize instance from the 'connection' module
-const sequelize = require('../config/connection');
-
-// Define the User class, which extends the Sequelize Model class
+// Define the User class which extends the base Model class from sequelize
 class User extends Model {
-  // Define a method 'checkPassword' to verify a given password against the user's stored password
-  checkPassword(loginPw) {
-    // Use bcrypt to compare the provided password with the stored password
-    return bcrypt.compareSync(loginPw, this.password);
-  }
+    // Define a method to check if an unhashed password entered by the user can be compared to the hashed password stored in our database
+    checkPassword(loginPw) {
+        return bcrypt.compareSync(loginPw, this.password);
+    }
 }
 
-// Initialize the User model with its schema and configuration
+// Initialize the User model
 User.init(
+    {
+        // Define the id field
+        id: {
+          type: DataTypes.INTEGER, // The type of this field is an integer
+          primaryKey: true, // This field is the primary key
+          autoIncrement: true // This field will auto increment
+        },
+        // Define the username field
+        username: {
+          type: DataTypes.STRING, // The type of this field is a string
+        },
+        // Define the twitter field
+        twitter: {
+            type: DataTypes.STRING, // The type of this field is a string
+            allowNull: true // This field can be null
+        },
+        // Define the github field
+        github: {
+            type: DataTypes.STRING, // The type of this field is a string
+            allowNull: true // This field can be null
+        },
+        // Define the email field
+        email: {
+          type: DataTypes.STRING, // The type of this field is a string
+          unique: true, // This field must be unique
+          validate: {
+            isEmail: true // This field must be a valid email
+          }
+        },
+        // Define the password field
+        password: {
+          type: DataTypes.STRING, // The type of this field is a string
+          validate: {
+            len: [4] // This field must be at least 4 characters long
+          }
+        }
+      },
   {
-    // Define the schema for the User model
-    id: {
-      type: DataTypes.INTEGER, // The 'id' field is an integer
-      allowNull: false, // 'id' must be provided
-      primaryKey: true, // 'id' is the primary key
-      autoIncrement: true, // 'id' will auto-increment
-    },
-    username: {
-      type: DataTypes.STRING, // The 'username' field is a string
-      allowNull: false, // 'username' must be provided
-    },
-    email: {
-      type: DataTypes.STRING, // The 'email' field is a string
-      allowNull: false, // 'email' must be provided
-      unique: true, // 'email' must be unique
-      validate: {
-        isEmail: true, // 'email' must be a valid email address
+      // Define hooks for the User model
+      hooks: {
+        // This hook will run before a new user is created
+        async beforeCreate(newUserData) {
+            // Hash the password of the new user
+            newUserData.password = await bcrypt.hash(newUserData.password, 10);
+            return newUserData;
+        },
+        // This hook will run before an existing user is updated
+        async beforeUpdate(updatedUserData) {
+            // Hash the updated password of the user
+            updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
+            return updatedUserData;
+        }
       },
-    },
-    password: {
-      type: DataTypes.STRING, // The 'password' field is a string
-      allowNull: false, // 'password' must be provided
-      validate: {
-        len: [6], // 'password' must be at least 6 characters long
-      },
-    },
-  },
-  {
-    // Define the configuration for the User model
-    hooks: {
-      // Define a 'beforeCreate' hook to hash the user's password before storing it in the database
-      async beforeCreate(newUserData) {
-        newUserData.password = await bcrypt.hash(newUserData.password, 10);
-        return newUserData;
-      },
-    },
-    sequelize, // Pass the sequelize instance to the User model
-    timestamps: false, // Do not automatically add timestamp fields (createdAt, updatedAt)
-    freezeTableName: true, // Prevent sequelize from pluralizing the model name
-    underscored: true, // Enable underscored mode for automatically generated fields
-    modelName: 'user', // Set the model name to 'user'
+
+    sequelize, // Pass the sequelize instance to the model
+    timestamps: false, // Disable timestamps for this model
+    freezeTableName: true, // Prevent sequelize from renaming the table
+    underscored: true, // Enable the use of underscores instead of camel-casing
+    modelName: 'user' // Set the name of the model
   }
 );
 
-// Export the User model for use in other parts of the application
+// Export the User model
 module.exports = User;
