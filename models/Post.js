@@ -1,51 +1,45 @@
-// Import the necessary modules from 'sequelize'
+// Import the necessary modules from sequelize
 const { Model, DataTypes } = require('sequelize');
-
-// Import the configured sequelize instance from the 'connection' module
+// Import the configured sequelize instance
 const sequelize = require('../config/connection');
 
-// Define the Post class, which extends the Sequelize Model class
-class Post extends Model { }
+// Define the Post class which extends the base Model class from sequelize
+class Post extends Model {}
 
-// Initialize the Post model with its schema and configuration
+// Initialize the Post model
 Post.init(
   {
-    // Define the schema for the Post model
+    // Define the id field
     id: {
-      type: DataTypes.INTEGER, // The 'id' field is an integer
-      allowNull: false, // 'id' must be provided
-      primaryKey: true, // 'id' is the primary key
-      autoIncrement: true, // 'id' will auto-increment
+        type: DataTypes.INTEGER, // The type of this field is an integer
+        primaryKey: true, // This field is the primary key
+        autoIncrement: true // This field will auto increment
     },
+    // Define the title field
     title: {
-      type: DataTypes.STRING, // The 'title' field is a string
-      allowNull: false, // 'title' must be provided
+        type: DataTypes.STRING, // The type of this field is a string
     },
-    date: {
-      type: DataTypes.DATE, // The 'date' field is a date
-      allowNull: false, // 'date' must be provided
+    // Define the post_content field
+    post_content: {
+        type: DataTypes.TEXT, // The type of this field is text
+        allowNull: true // This field can be null
     },
-    post_text: {
-      type: DataTypes.STRING, // The 'post_text' field is a string
-      allowNull: false, // 'post_text' must be provided
-    },
+    // Define the user_id field
     user_id: {
-      type: DataTypes.INTEGER, // The 'user_id' field is an integer
-      // 'user_id' references the 'id' field in the 'user' model
-      references: {
-        model: 'user',
-        key: 'id',
-      },
-    },
+        type: DataTypes.INTEGER, // The type of this field is an integer
+        references: {
+          model: 'user', // This field references the 'user' model
+          key: 'id' // The key in the 'user' model that this field references is 'id'
+        }
+    }
   },
   {
-    sequelize, // Pass the sequelize instance to the Post model
-    timestamps: false, // Do not automatically add timestamp fields (createdAt, updatedAt)
-    freezeTableName: true, // Prevent sequelize from pluralizing the model name
-    underscored: true, // Enable underscored mode for automatically generated fields
-    modelName: 'user', // Set the model name to 'user'
+    sequelize, // Pass the sequelize instance to the model
+    freezeTableName: true, // Prevent sequelize from renaming the table
+    underscored: true, // Enable the use of underscores instead of camel-casing
+    modelName: 'post' // Set the name of the model
   }
 );
 
-// Export the Post model for use in other parts of the application
+// Export the Post model
 module.exports = Post;
