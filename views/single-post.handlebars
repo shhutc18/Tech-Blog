@@ -4,6 +4,8 @@
 <!-- If the user is logged in, display the comment form -->
 {{#if loggedIn}}
 <form class="comment-form">
+  <!-- Hidden input for the post id -->
+  <input type="hidden" name="post-id" value="{{post.id}}">
   <!-- Textarea for the comment body -->
   <textarea class="ml-5" name="comment-body"></textarea>
   <!-- Submit button for the comment form -->
