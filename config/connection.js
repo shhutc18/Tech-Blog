@@ -20,7 +20,7 @@ if (process.env.JAWSDB_URL) {
     {
       host: 'localhost', // The host of the database
       dialect: 'mysql', // Connect to the database using the MySQL dialect
-      port: 3306 // The port on which the database is running
+      port: 3001 // The port on which the database is running
     }
   );
 }
