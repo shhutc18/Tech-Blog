@@ -6,7 +6,7 @@ const userData = [
   {
     // The first user has the username "john_doe", twitter handle "johnd", github handle "johnd", email "john_doe@gmail.com", and password "p@ssword7"
     username: "john_doe",
-    twitter: "johnd",
+    twitter: "johndoefakeexample",
     github: "johnd",
     email: "john_doe@gmail.com",
     password: "p@ssword7"
@@ -14,7 +14,7 @@ const userData = [
   {
     // The second user has the username "jane_doe", twitter handle "janed", github handle "janed", email "jane_doe@gmail.com", and password "p@ssword8"
     username: "jane_doe",
-    twitter: "janed",
+    twitter: "janedoefakeexample",
     github: "janed",
     email: "jane_doe@gmail.com",
     password: "p@ssword8"
