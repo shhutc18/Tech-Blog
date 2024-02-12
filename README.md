@@ -26,7 +26,7 @@ This application is a technology blog. Upon signing in, you will be able to post
 
 ## Installation
 
-None required. You can view the deployed application here: 
+None required. You can view the deployed application here: https://polar-anchorage-25844-226ff91079f7.herokuapp.com/
 
 ## Usage
 
@@ -43,6 +43,7 @@ I worked on this on this project with my peers, Chase Seeberger and Will Schickl
 ## Link
 
 https://github.com/shhutc18/Tech-Blog
+https://polar-anchorage-25844-226ff91079f7.herokuapp.com/
 
 ## Screenshot
 
