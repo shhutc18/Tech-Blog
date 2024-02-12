@@ -26,23 +26,11 @@ This application is a technology blog. Upon signing in, you will be able to post
 
 ## Installation
 
-1. Clone this repository: https://github.com/shhutc18/Tech-Blog
-2. Open the cloned repository in any source code editor.
+None required. You can view the deployed application here: 
 
 ## Usage
 
-1. In the root directory of the project, type in the terminal command line 'npm install' to download the dependencies.
-2. Initiate the database with 'mysql -u root -p', then 'SOURCE db/schema.sql' to create the tables.
-3. Exit the SQL terminal.
-4. Type 'npm run seed' into command line to seed the data into your tables.
-5. Add a .env file to the root of the project
-
-```text
-DB_NAME='tech_blog_db'
-DB_USER='root'
-DB_PW='XXX'
-```
-6. Run 'npm start' to start the server!
+The user can browse, edit, delete, and comment on blog posts by logging in.
 
 ## License
 
@@ -58,7 +46,7 @@ https://github.com/shhutc18/Tech-Blog
 
 ## Screenshot
 
-<!-- Insert screenshot here -->
+<img src="/public/images/TechFinal.png">
 
 ## Questions
 
